@@ -40,6 +40,7 @@ dependencies {
 
     implementation "androidx.core:core-ktx:$rootProject.coreKtx_version"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompat_version"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentKtx_version"
     implementation "com.google.android.material:material:$rootProject.material_version"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout_version"
     testImplementation "junit:junit:$rootProject.junit_version"
@@ -48,8 +49,11 @@ dependencies {
 
     //ktor
     implementation "io.ktor:ktor-client-core:$rootProject.ktor_version"
-    implementation "io.ktor:ktor-client-cio:$rootProject.ktor_version"
-    implementation "io.ktor:ktor-client-okhttp:$rootProject.ktor_version"
+    implementation "io.ktor:ktor-client-android:$rootProject.ktor_version"
+    implementation "io.ktor:ktor-client-serialization:$rootProject.ktor_version"
+    implementation "io.ktor:ktor-client-logging:$rootProject.ktor_version"
+    implementation "ch.qos.logback:logback-classic:$rootProject.logging_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$rootProject.serialization_version"
 
     // Hilt dependencies
     implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
