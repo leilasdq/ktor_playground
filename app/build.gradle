@@ -34,6 +34,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.1"
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
@@ -47,7 +58,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$rootProject.junitExt_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
 
-    //ktor
+    //ktor dependencies
     implementation "io.ktor:ktor-client-core:$rootProject.ktor_version"
     implementation "io.ktor:ktor-client-android:$rootProject.ktor_version"
     implementation "io.ktor:ktor-client-serialization:$rootProject.ktor_version"
@@ -60,4 +71,15 @@ dependencies {
     annotationProcessor "com.google.dagger:hilt-compiler:$rootProject.hilt_version"
     implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
     kapt "com.google.dagger:hilt-compiler:$rootProject.hilt_version"
+
+    // compose dependencies
+    implementation "androidx.compose.ui:ui:$rootProject.compose_version"
+    implementation "androidx.compose.material:material:$rootProject.compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$rootProject.compose_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$rootProject.compose_version"
+
+    // navigation dependencies
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation_version"
 }
