@@ -1,5 +1,7 @@
 package com.example.ktor_playground.ui.photos
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ktor_playground.common.ResponseResult
@@ -19,7 +21,7 @@ class PhotosViewModel @Inject constructor(
         getPhotos()
     }
 
-    private val _photos: MutableStateFlow<List<Photos>> = MutableStateFlow(listOf())
+    private val _photos = mutableStateOf(emptyList<Photos>())
     val photosData = _photos
 
     private fun getPhotos() {

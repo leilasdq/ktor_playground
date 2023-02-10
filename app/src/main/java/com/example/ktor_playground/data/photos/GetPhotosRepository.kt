@@ -24,7 +24,7 @@ class DefaultGetPhotosRepository @Inject constructor(
         val remoteData = Dispatchers.IO.run {
             service.getAllPhotos()
         }
-        emit(ResponseResult.SUCCESS(remoteData.map { it.toDomain() }))
+        emit(ResponseResult.SUCCESS(remoteData.take(100).map { it.toDomain() }))
     }.catch {
         when(it) {
             is RedirectResponseException -> {

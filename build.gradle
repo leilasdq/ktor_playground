@@ -15,6 +15,7 @@ buildscript {
         hilt_version = '2.44.2'
         serializationJson_version = '1.4.1'
         compose_version = '1.4.0-beta01'
+        composeCoil_version = '2.2.2'
         composeMaterialThree_version = '1.0.1'
         navigation_version = "2.5.3"
     }
