@@ -21,11 +21,14 @@ class DefaultGetPhotosRepository @Inject constructor(
 ): GetPhotosRepository {
 
     override fun getAllPhotos(): Flow<ResponseResult<List<Photos>>> = flow<ResponseResult<List<Photos>>> {
+        emit(ResponseResult.LOADING(true))
         val remoteData = Dispatchers.IO.run {
             service.getAllPhotos()
         }
         emit(ResponseResult.SUCCESS(remoteData.take(100).map { it.toDomain() }))
+        emit(ResponseResult.LOADING(false))
     }.catch {
+        emit(ResponseResult.LOADING(false))
         when(it) {
             is RedirectResponseException -> {
                 //3xx

@@ -21,8 +21,12 @@ class PhotosViewModel @Inject constructor(
         getPhotos()
     }
 
-    private val _photos = mutableStateOf(emptyList<Photos>())
-    val photosData = _photos
+    private val _photos = MutableStateFlow(emptyList<Photos>())
+    val photosData = _photos.asStateFlow()
+    private val _photoErrorData = MutableSharedFlow<Throwable>()
+    val photoError = _photoErrorData.asSharedFlow()
+    private val _photoLoadingData = MutableSharedFlow<Boolean>()
+    val photoLoadingData = _photoLoadingData.asSharedFlow()
 
     private fun getPhotos() {
         viewModelScope.launch {
@@ -33,13 +37,17 @@ class PhotosViewModel @Inject constructor(
                             _photos.value = it
                         }
                     }
-                    else -> {
-
+                    is ResponseResult.ERROR -> {
+                        result.message.let {
+                            _photoErrorData.emit(it)
+                        }
                     }
+                    is ResponseResult.LOADING ->
+                        _photoLoadingData.emit(result.isLoading)
                 }
-
             }
-        }
 
+        }
     }
+
 }
