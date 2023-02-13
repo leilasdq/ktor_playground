@@ -19,12 +19,16 @@ object NetworkModule {
 
     @Provides
     fun provideHttpClient(): HttpClient {
-        return HttpClient(Android) {
+        return HttpClient {
             Logging {
                 level = LogLevel.ALL
             }
             install(JsonFeature) {
-                serializer = KotlinxSerializer()
+                serializer = KotlinxSerializer(
+                    kotlinx.serialization.json.Json {
+                        ignoreUnknownKeys = true
+                    }
+                )
                 this.acceptContentTypes = listOf(ContentType.Application.Json)
             }
         }
